@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,22 +35,28 @@ public class SignupController {
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String submitForm(
+            Model model,
             @RequestParam String name, 
             @RequestParam String street, 
             @RequestParam String postcode, 
             @RequestParam String city, 
             @RequestParam String photo) {
-        signupRepository.save(new Signup(name, street, postcode, city, photo));
-        return "done";
+        Long id = signupRepository.save(new Signup(name, street, postcode, city, photo)).getId();
+                
+        return "redirect:user/" + id;
     }
     
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public String userPage(Model model, @PathVariable Long id) {
+    public String userPage(ModelMap model, @PathVariable Long id) {
         // Get a user from the signupRepository
         
-        Signup user = signupRepository.getOne(id);
+        Signup user = signupRepository.findOne(id);
         
-        model.addAttribute("username", user.getName());
+        if (user == null) {
+            return "notfound";
+        }
+        
+        model.addAttribute("user", user);
         
         return "user";
     }

@@ -36,7 +36,20 @@ public class SampleTest {
 
     @Test
     public void signupAddsDataToDatabase() throws Throwable {
-        mockMvc.perform(post("/form").param("name", "Testname").param("address", "Testaddress")).andReturn();
-        assertEquals(1L, signupRepository.findAll().stream().filter(s -> s.getName().equals("Testname") && s.getAddress().equals("Testaddress")).count());
+        mockMvc.perform(
+                post("/form")
+                    .param("name", "Testname")
+                    .param("street", "Teststreet")
+                    .param("postcode", "Testpostcode")
+                    .param("city", "Testcity")
+                    .param("photo", "Testphoto"))
+                .andReturn();
+        assertEquals(1L, signupRepository.findAll().stream().filter(s -> 
+                s.getName().equals("Testname") &&
+                s.getStreet().equals("Teststreet") &&
+                s.getPostcode().equals("Testpostcode") &&
+                s.getCity().equals("Testcity") &&
+                s.getPhoto().equals("Testphoto")
+        ).count());
     }
 }
