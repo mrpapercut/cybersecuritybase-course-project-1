@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="common_header">
+        <title th:text="${title}"></title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    </head>
+    
+    <body>
+        <header id="navheader" th:fragment="navheader">
+            <a href="/form">Sign up</a>
+            <a href="/users">Attendees list</a>
+            <th:block th:if="${cookieuid}">
+                <a th:href="@{/user/{id}(id=${cookieuid})}">My account</a>
+            </th:block>
+            <a href="/login" th:if="${cookieuid}" th:href="@{/logout}" th:text="Logout">Login</a>
+        </header>
+    </body>
+</html>

@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Sign up form</title>
-    </head>
+    <head th:replace="header :: common_header(title='Sign up')"></head>
     <body>
-
-        <h1>Sign up using this form</h1>
-
-        <form action="#" th:action="@{/form}" method="POST">
-            <p><label for="name">Name</label>: <input type="text" name="name" id="name"/></p>
-            <p><label for="street">Street</label>: <input type="text" name="street" id="street"/></p>
-            <p><label for="postcode">Postcode</label>: <input type="text" name="postcode" id="postcode"/></p>
-            <p><label for="city">City</label>: <input type="text" name="city" id="city"/></p>
-            <p><label for="photo">Profile photo</label>: <input type="file" name="upload" id="upload"/></p>
-            <p>
-                <input type="hidden" id="photo" name="photo" />
-                <img id="thumbnail" />
-            </p>
-            <p><input type="submit" value="Submit" /></p>
-        </form>
-
+        <header th:replace="header :: navheader"></header>
+        <div id="content">
+            <h1>Sign up to our event</h1>
+            <form action="#" th:action="@{/form}" method="POST">
+                <p><label for="email">Email</label>: <input type="text" name="email" id="email" /></p>
+                <p><label for="password">Password</label>: <input type="password" name="password" id="password" /></p>
+                <p><label for="name">Name</label>: <input type="text" name="name" id="name" /></p>
+                <p><label for="street">Street</label>: <input type="text" name="street" id="street" /></p>
+                <p><label for="postcode">Postcode</label>: <input type="text" name="postcode" id="postcode" /></p>
+                <p><label for="city">City</label>: <input type="text" name="city" id="city" /></p>
+                <p><label for="photo">Profile photo</label>: 
+                    <input type="button" id="triggerupload" value="Choose file"/>
+                    <input type="file" name="upload" id="upload"/></p>
+                <p>
+                    <input type="hidden" id="photo" name="photo" />
+                    <img id="thumbnail" />
+                </p>
+                <p><input type="submit" value="Submit" /></p>
+            </form>
+        </div>
+        
         <script>
-            document.getElementById("photo").addEventListener("change", function(e) {
+            document.getElementById("upload").addEventListener("change", function(e) {
                 var file = e.target.files[0];
                 var reader = new FileReader();
                 
                 reader.onload = function(f) {
                     document.getElementById("thumbnail").src = f.target.result;
-                    document.getElementById("photo").value = f.target.result;
+                    document.getElementById("photo").value = f.target.name;
                 };
                 
                 reader.readAsDataURL(file);
+            });
+            
+            document.getElementById("triggerupload").addEventListener("click", function(e) {
+                document.getElementById("upload").click();
             });
         </script>
     </body>

@@ -38,6 +38,8 @@ public class SampleTest {
     public void signupAddsDataToDatabase() throws Throwable {
         mockMvc.perform(
                 post("/form")
+                    .param("email", "test@test.com")
+                    .param("password", "p4ssw0rd")
                     .param("name", "Testname")
                     .param("street", "Teststreet")
                     .param("postcode", "Testpostcode")
@@ -45,6 +47,8 @@ public class SampleTest {
                     .param("photo", "Testphoto"))
                 .andReturn();
         assertEquals(1L, signupRepository.findAll().stream().filter(s -> 
+                s.getEmail().equals("test@test.com") &&
+                s.getPassword().equals("p4ssw0rd") &&
                 s.getName().equals("Testname") &&
                 s.getStreet().equals("Teststreet") &&
                 s.getPostcode().equals("Testpostcode") &&

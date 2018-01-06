@@ -1,0 +1,66 @@
+html {
+    background: grey;
+}
+
+body {
+    background: #fff;
+    font-family: monospace;
+    width: calc(720px - 2em);
+    margin: 1em auto;
+    box-shadow: 2px 2px 5px #000;
+    padding: 1em;
+}
+
+#content {
+    width: 320px;
+    margin: 0 auto;
+}
+
+#navheader {
+    text-align: center;
+    border-bottom: 1px solid #000;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 0.5em;
+}
+
+#navheader a {
+    color: #000;
+}
+
+h1 {
+    text-align: center;
+}
+
+form label {
+    width: 100px;
+    display: inline-block;
+}
+
+form input {
+    outline: none;
+    width: calc(200px - 1em);
+    border: none;
+    border-left: 2px solid #000;
+    border-top: 2px solid #000;
+    box-shadow: 2px 2px grey;
+    font-family: monospace;
+    padding: .5em;
+}
+
+input[type="submit"],
+input[type="button"] {
+    border: none;
+    border-left: 2px solid #000;
+    border-top: 2px solid #000;
+    box-shadow: 2px 2px grey;
+    cursor: pointer;
+    width: 100px;
+    font-family: monospace;
+    background: #fff;
+    line-height: 2em;
+}
+
+input[type="file"] {
+    display: none;
+}
