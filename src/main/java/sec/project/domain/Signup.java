@@ -12,14 +12,13 @@ public class Signup extends AbstractPersistable<Long> {
     private String street;
     private String postcode;
     private String city;
-    private String photo;
 
     public Signup() {
         super();
     }
 
     public Signup(String email, String password, String name, String street, 
-            String postcode, String city, String photo) {
+            String postcode, String city) {
         this();
         this.email = email;
         this.password = password;
@@ -27,7 +26,6 @@ public class Signup extends AbstractPersistable<Long> {
         this.street = street;
         this.postcode = postcode;
         this.city = city;
-        this.photo = photo;
     }
     
     public String getEmail() {
@@ -77,13 +75,4 @@ public class Signup extends AbstractPersistable<Long> {
     public void setCity(String city) {
         this.city = city;
     }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
 }

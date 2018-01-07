@@ -43,8 +43,7 @@ public class SampleTest {
                     .param("name", "Testname")
                     .param("street", "Teststreet")
                     .param("postcode", "Testpostcode")
-                    .param("city", "Testcity")
-                    .param("photo", "Testphoto"))
+                    .param("city", "Testcity"))
                 .andReturn();
         assertEquals(1L, signupRepository.findAll().stream().filter(s -> 
                 s.getEmail().equals("test@test.com") &&
@@ -52,8 +51,7 @@ public class SampleTest {
                 s.getName().equals("Testname") &&
                 s.getStreet().equals("Teststreet") &&
                 s.getPostcode().equals("Testpostcode") &&
-                s.getCity().equals("Testcity") &&
-                s.getPhoto().equals("Testphoto")
+                s.getCity().equals("Testcity")
         ).count());
     }
 }

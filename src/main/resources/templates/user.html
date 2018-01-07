@@ -12,33 +12,8 @@
                 <p><label for="street">Street</label>: <input type="text" name="street" id="street" th:value="${user.street}" /></p>
                 <p><label for="postcode">Postcode</label>: <input type="text" name="postcode" id="postcode" th:value="${user.postcode}" /></p>
                 <p><label for="city">City</label>: <input type="text" name="city" id="city" th:value="${user.city}" /></p>
-                <p><label for="photo">Profile photo</label>: 
-                    <input type="button" id="triggerupload" value="Choose file"/>
-                    <input type="file" name="upload" id="upload"/></p>
-                <p>
-                    <input type="hidden" id="photo" name="photo" />
-                    <img id="thumbnail" />
-                </p>
                 <p><input type="submit" value="Submit" /></p>
             </form>
         </div>
-        
-        <script>
-            document.getElementById("upload").addEventListener("change", function(e) {
-                var file = e.target.files[0];
-                var reader = new FileReader();
-                
-                reader.onload = function(f) {
-                    document.getElementById("thumbnail").src = f.target.result;
-                    document.getElementById("photo").value = f.target.name;
-                };
-                
-                reader.readAsDataURL(file);
-            });
-            
-            document.getElementById("triggerupload").addEventListener("click", function(e) {
-                document.getElementById("upload").click();
-            });
-        </script>
     </body>
 </html>

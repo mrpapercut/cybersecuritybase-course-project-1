@@ -9,12 +9,15 @@
     
     <body>
         <header id="navheader" th:fragment="navheader">
-            <a href="/form">Sign up</a>
             <a href="/users">Attendees list</a>
             <th:block th:if="${cookieuid}">
                 <a th:href="@{/user/{id}(id=${cookieuid})}">My account</a>
+                <a th:href="@{/logout}">Logout</a>
             </th:block>
-            <a href="/login" th:if="${cookieuid}" th:href="@{/logout}" th:text="Logout">Login</a>
+            <th:block th:unless="${cookieuid}">
+                <a th:href="@{/form}">Sign up</a>
+                <a th:href="@{/login}">Login</a>
+            </th:block>
         </header>
     </body>
 </html>

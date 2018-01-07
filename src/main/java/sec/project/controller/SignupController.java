@@ -61,13 +61,13 @@ public class SignupController {
             @RequestParam String name, 
             @RequestParam String street, 
             @RequestParam String postcode, 
-            @RequestParam String city, 
-            @RequestParam String photo,
+            @RequestParam String city,
             HttpServletResponse response) {
         
-        Long id = signupRepository.save(new Signup(email, password, name, street, postcode, city, photo)).getId();
+        Long id = signupRepository.save(new Signup(email, password, name, street, postcode, city)).getId();
         
         Cookie cookie = new Cookie("cookieuid", id.toString());
+        cookie.setMaxAge(3600);
         response.addCookie(cookie);
                 
         return "redirect:/user/" + id;
@@ -113,8 +113,7 @@ public class SignupController {
             @RequestParam String name, 
             @RequestParam String street, 
             @RequestParam String postcode, 
-            @RequestParam String city, 
-            @RequestParam String photo,
+            @RequestParam String city,
             @PathVariable Long id) {
         
         Signup user = signupRepository.findOne(id);
@@ -129,7 +128,6 @@ public class SignupController {
         user.setStreet(street);
         user.setPostcode(postcode);
         user.setCity(city);
-        user.setPhoto(photo);
         
         signupRepository.save(user);
         
@@ -137,8 +135,12 @@ public class SignupController {
     }
     
     @RequestMapping (value = "/logout", method = RequestMethod.GET)
-    public String logoutUser(HttpServletRequest request) throws MalformedURLException {
+    public String logoutUser(HttpServletRequest request, HttpServletResponse response) throws MalformedURLException {
         String referer = new URL(request.getHeader("referer")).getPath();
+        
+        Cookie cookie = new Cookie("cookieuid", "0");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         
         return "redirect:/login?nextpage=" + referer;
     }
